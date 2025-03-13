@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.name }} - Details</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .product-image {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="card">
+        {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image img-fluid mb-3">
+        {% else %}
+            <p class="text-center text-muted">📷 No image available</p>
+        {% endif %}
+
+        <h2 class="text-center">{{ product.name }}</h2>
+        <p><strong>Description:</strong> {{ product.description }}</p>
+        <p><strong>Price:</strong> ${{ product.price }}</p>
+        <p><strong>Made in:</strong> {{ product.made_in }}</p>
+
+        <div class="text-center mt-3">
+            <a href="{% url 'update' product.pk %}" class="btn btn-warning">✏️ Update</a>
+            <a href="{% url 'delete' product.pk %}" class="btn btn-danger">🗑️ Delete</a>
+            <a href="{% url 'list' %}" class="btn btn-secondary">⬅️ Back</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
