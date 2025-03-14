@@ -18,3 +18,17 @@ class Profile(models.Model):
         verbose_name = 'Profile'
 
 
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='profile_pics/', default='default.jpg')
+
+    def __str__(self):
+        return self.user.username
+
+    class Meta:
+        verbose_name = 'Profile'
+
+
+
+

@@ -6,11 +6,12 @@ class ProductForm(forms.ModelForm):
         model = Product
         fields = ['name', 'category', 'made_in', 'description', 'price', 'image']
 
-
     def clean_name(self):
-        name = self.cleaned_data.get('name')
-        if not name.isalpha():
-            raise forms.ValidationError('Name must contain only letters')
+        name = self.cleaned_data.get('name', '').strip()
+        if not name:
+            raise forms.ValidationError('Name field cannot be empty')
+        if not name.replace(' ', '').isalpha():
+            raise forms.ValidationError('Name must contain only letters and spaces')
         return name
 
     def clean_price(self):

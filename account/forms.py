@@ -3,6 +3,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import AuthenticationForm
 from .models import Profile
+from .models import UserProfile
 
 
 class RegisterForm(forms.ModelForm):
@@ -56,3 +57,17 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['first_name', 'last_name', 'email', 'location', 'image']
+
+
+
+
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ["username", "first_name", "last_name", "email"]
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ["image"]

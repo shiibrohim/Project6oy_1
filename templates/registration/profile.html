@@ -23,6 +23,14 @@
             color: #007bff;
             font-weight: bold;
         }
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #007bff;
+            margin-bottom: 15px;
+        }
         .profile-info p {
             font-size: 16px;
             margin-bottom: 8px;
@@ -38,15 +46,23 @@
     <div class="profile-container">
         <h2>👤 My Profile</h2>
 
+        <!-- Profil rasmi -->
+        {% if user.profile.image %}
+            <img src="{{ user.profile.image.url }}" alt="Profile Picture" class="profile-image">
+        {% else %}
+            <img src="/media/default.jpg" alt="Default Profile" class="profile-image">
+        {% endif %}
+
         <div class="profile-info">
-            <p><strong>👤 Username:</strong> {{ user.username }}</p>
-            <p><strong>   First Name:</strong> {{ user.first_name }}</p>
-            <p><strong>📝 Last Name:</strong> {{ user.last_name }}</p>
-            <p><strong>📧 Email:</strong> {{ user.email }}</p>
+            <p><strong> Username:</strong> {{ user.username }}</p>
+            <p><strong> First Name:</strong> {{ user.first_name }}</p>
+            <p><strong> Last Name:</strong> {{ user.last_name }}</p>
+            <p><strong> Email:</strong> {{ user.email }}</p>
         </div>
 
         <div class="btn-container">
             <a href="{% url 'list' %}" class="btn btn-secondary">⬅️ Back</a>
+            <a href="{% url 'account:profile_edit' %}" class="btn btn-primary">✏️ Edit Profile</a>
         </div>
     </div>
 </div>
